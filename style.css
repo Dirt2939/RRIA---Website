@@ -1,0 +1,125 @@
+:root {
+    --cor-destaque: #002C47;
+    --cor-segundaria: #333;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(180deg, #ffffff 0%, #f2fbff 100%);
+    font-family: Arial, sans-serif;
+    color: #002C47;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #013955;
+    color: #fff;
+}
+
+.marca h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.btn-voltar {
+    background-color: #fff;
+    color: #00AEEF;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #e6f7ff;
+    transform: translateY(-2px);
+}
+
+#home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80vh;
+    padding: 0 7%;
+    gap: 2rem;
+}
+
+.hero-left {
+    flex: 1;
+    max-width: 50%;
+}
+
+.hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-right img {
+    max-width: 70%;
+    height: auto;
+    filter: drop-shadow(0 6px 14px rgba(0, 47, 71, 0.25));
+    animation: fadein 0.7s ease;
+}
+
+#container-txt {
+    padding-bottom: 1rem;
+}
+
+#titulo h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--cor-destaque);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+#subtitulo h3 {
+    color: var(--cor-segundaria);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}
+
+/* Botão */
+#btn-ir {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#btn-ir a {
+    display: inline-block;
+    background-color: #00AEEF;
+    color: #fff;
+    padding: 1rem 2.4rem;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 16px rgba(0, 174, 239, 0.35);
+    transition: 0.25s ease-in-out;
+}
+
+#btn-ir a:hover {
+    background-color: #0087b5;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 135, 181, 0.4);
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

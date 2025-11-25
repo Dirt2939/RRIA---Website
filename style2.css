@@ -1,0 +1,52 @@
+:root {
+    --cor-destaque: #002C47;
+    --cor-segundaria: #333;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(180deg, #ffffff 0%, #f2fbff 100%);
+    font-family: Arial, sans-serif;
+    color: #002C47;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #013955;
+    color: #fff;
+}
+
+.marca h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+#container-txt {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+#titulo h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--cor-destaque);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+#subtitulo h3 {
+    color: var(--cor-segundaria);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}

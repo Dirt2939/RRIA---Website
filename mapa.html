@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Mapa Investigativo</title>
+</head>
+
+<body>
+    <header>
+        <div class="marca">
+            <h1>RRIA</h1>
+        </div>
+    </header>
+
+    <section id="mapa">
+        <div id="container-mapa">
+            <div id="container-txt">
+                <div id="titulo">
+                    <h2>Mapa das Seções</h2>
+                </div>
+                <div id="subtitulo">
+                    <h3>Cada ponto representa uma unidade de análise da RRIA — navegue pelas seções usando nossa visão
+                        geolocalizada.</h3>
+                </div>
+
+                <svg width="700" height="500" style="border:1px solid #999; background:#e6f2ff; font-family:Arial">
+                    <!-- Áreas de bairro -->
+                    <rect x="0" y="0" width="700" height="250" fill="#f9f9f9" />
+                    <rect x="0" y="250" width="700" height="250" fill="#f0f0f0" />
+                    <text x="20" y="40" font-size="14" fill="#666">Bairro Jardim Azul</text>
+                    <text x="20" y="280" font-size="14" fill="#666">Bairro Vila Nova</text>
+
+                    <!-- Estradas principais (alinhadas com a rota) -->
+                    <!-- Horizontal superior -->
+                    <rect x="0" y="155" width="700" height="30" fill="#dcdcdc" />
+                    <!-- Vertical central -->
+                    <rect x="365" y="155" width="30" height="190" fill="#dcdcdc" />
+                    <!-- Horizontal inferior -->
+                    <rect x="0" y="310" width="700" height="30" fill="#dcdcdc" />
+
+                    <!-- Nomes das ruas -->
+                    <text x="20" y="150" font-size="12" fill="#333">Av. Central</text>
+                    <text x="380" y="180" font-size="12" fill="#333" transform="rotate(90 380,180)">Rua do Sol</text>
+                    <text x="20" y="305" font-size="12" fill="#333">Rua das Flores</text>
+
+                    <!-- Ponto A -->
+                    <circle cx="80" cy="170" r="10" fill="blue" />
+                    <text x="70" y="150" font-size="12" fill="blue">Ponto A</text>
+
+                    <!-- Ponto B -->
+                    <circle cx="620" cy="325" r="10" fill="red" />
+                    <text x="610" y="305" font-size="12" fill="red">Ponto B</text>
+
+                    <!-- Caminho em Z (rota sobre as estradas) -->
+                    <path id="trajeto" d="M80,170 L380,170 L380,325 L620,325" stroke="#00cc66" stroke-width="6"
+                        fill="none" stroke-linecap="round" stroke-dasharray="10,5" />
+
+                    <!-- Marcador animado (seta) -->
+                    <polygon points="0,0 20,10 0,20" fill="orange">
+                        <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#trajeto" />
+                        </animateMotion>
+                    </polygon>
+                </svg>
+
+
+
+
+
+
+            </div>
+    </section>
+</body>
+
+</html>
