@@ -75,7 +75,7 @@ header {
     margin: 0 auto;
 }
 
-/* macOS-style window with site colors */
+/* Clean map container style */
 .map-wrapper {
     position: relative;
     width: 100%;
@@ -89,7 +89,11 @@ header {
     touch-action: none;
 }
 
-/* macOS window header - site theme colors */
+/* ========================================
+   BACKUP JANELA MAC - Descomentando abaixo você restaura o estilo macOS
+   ========================================
+
+/* macOS window header - site theme colors
 .map-wrapper::before {
     content: '';
     position: absolute;
@@ -102,8 +106,9 @@ header {
     border-bottom: 1px solid #002C47;
     pointer-events: none;
 }
+*/
 
-/* macOS traffic lights */
+/* macOS traffic lights
 .map-wrapper::after {
     content: '';
     position: absolute;
@@ -120,6 +125,10 @@ header {
     z-index: 26;
     pointer-events: none;
 }
+*/
+
+/* FIM BACKUP JANELA MAC
+   ======================================== */
 
 /* Fullscreen mode adjustments */
 .map-wrapper:fullscreen,
@@ -150,9 +159,11 @@ header {
 svg {
     width: 100%;
     max-width: 100%;
-    height: calc(100% - 40px);
+    height: 100%;
+    /* Clean style: full height without header offset */
     display: block;
-    margin-top: 40px;
+    margin-top: 0;
+    /* Clean style: no header offset */
 }
 
 .map-point {
@@ -262,26 +273,25 @@ svg {
     background-color: var(--cor-botao-hover);
 }
 
-/* Fullscreen Button - fixed styling */
+/* Fullscreen Button - clean style, top-right corner of map */
 .fullscreen-btn {
     position: absolute;
-    top: 3px;
+    top: 12px;
     right: 12px;
-    width: 34px;
-    height: 34px;
-    background: #ffffff;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.95);
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     z-index: 30;
     transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     padding: 0;
     color: var(--cor-destaque);
-    margin-bottom: 0.5rem;
 }
 
 .fullscreen-btn:hover {
@@ -372,6 +382,7 @@ svg {
         border-radius: 10px;
     }
 
+    /* BACKUP JANELA MAC - Mobile - descomentar para restaurar
     .map-wrapper::before {
         height: 35px;
     }
@@ -390,6 +401,13 @@ svg {
     svg {
         height: calc(100% - 35px);
         margin-top: 35px;
+    }
+    */
+
+    /* Clean style - SVG full height */
+    svg {
+        height: 100%;
+        margin-top: 0;
     }
 
     #info-popup {
@@ -416,9 +434,9 @@ svg {
     }
 
     .fullscreen-btn {
-        width: 30px;
-        height: 30px;
-        top: 2.5px;
+        width: 32px;
+        height: 32px;
+        top: 10px;
         right: 10px;
     }
 
@@ -447,6 +465,7 @@ svg {
         border-radius: 8px;
     }
 
+    /* BACKUP JANELA MAC - Extra small - descomentar para restaurar
     .map-wrapper::before {
         height: 30px;
     }
@@ -454,6 +473,13 @@ svg {
     svg {
         height: calc(100% - 30px);
         margin-top: 30px;
+    }
+    */
+
+    /* Clean style */
+    svg {
+        height: 100%;
+        margin-top: 0;
     }
 
     #info-popup {
@@ -466,9 +492,10 @@ svg {
     }
 
     .fullscreen-btn {
-        width: 28px;
-        height: 28px;
-        top: 1px;
+        width: 30px;
+        height: 30px;
+        top: 8px;
+        right: 8px;
     }
 
     .fullscreen-btn svg {
