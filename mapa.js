@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         1: {
             title: "Motor de Decisão",
             desc: "Veja como o sistema escolhe rotas e reage ao ambiente.",
-            url: "secao1.html"
+            url: "paginas/html/motorDecisao.html"
         },
         2: {
             title: "Arquitetura dos Dados",
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         4: {
             title: "Equipe",
-            desc: "Conheça quem criou o projeto e suas principais funções.",
+            desc: "Conheça quem criou o projeto e suas habilidade técnicas.",
             url: "secao4.html"
         }
 
