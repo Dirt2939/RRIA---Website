@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         2: {
             title: "Arquitetura dos Dados",
             desc: "Entenda como as informações são organizadas e ligadas.",
-            url: "secao2.html"
+            url: "paginas/html/arquiteturaDados.html"
         },
         3: {
             title: "Interface Operacional",
@@ -333,3 +333,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
