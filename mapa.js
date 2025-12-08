@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         3: {
             title: "Interface Operacional",
             desc: "Observe como as telas representam o funcionamento real.",
-            url: "secao3.html"
+            url: "paginas/html/interfaceOperacional.html"
         },
         4: {
-            title: "Equipe",
-            desc: "Conheça quem criou o projeto e suas habilidade técnicas.",
+            title: "Psicologia do Usuário",
+            desc: "Veja como emoções influenciam a tomada de decisão no app.",
             url: "secao4.html"
         }
 
@@ -333,4 +333,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-

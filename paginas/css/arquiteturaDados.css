@@ -42,10 +42,11 @@ body {
 
 .app-container {
     height: 100vh;
-    padding: 20px;
+    padding: 0;
+    /* REMOVED padding */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; REMOVED gap to avoid space below header */
 }
 
 .header {
@@ -74,9 +75,9 @@ body {
     gap: 20px;
     flex: 1;
     min-height: 0;
-    /* Important for scroll/flex */
     overflow: hidden;
-    /* Evita scroll da página inteira */
+    padding: 20px;
+    /* ADDED padding here */
 }
 
 /* Cartões */

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Operacional | RRIA</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/interfaceOperacional.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- BLOCO A: Cabeçalho de Controles -->
+    <header class="ops-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Interface Operacional</h1>
+                <p>Simulação da Experiência do Usuário Final & Conexão com Dados</p>
+            </div>
+
+            <div class="header-controls">
+                <button id="btn-xray" class="control-btn" title="Ver quais tabelas alimentam cada tela">
+                    <span class="material-icons-round">dataset</span>
+                    <span>Raio-X de Dados</span>
+                </button>
+
+                <div class="divider"></div>
+
+                <button onclick="window.location.href='../../mapa.html'" class="icon-btn" title="Voltar ao Mapa">
+                    <span class="material-icons-round">arrow_back</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="ops-main">
+
+        <!-- LADO ESQUERDO: Mini-Simulações (Bloco D) -->
+        <aside class="simulation-panel">
+            <h3>Simular Eventos</h3>
+            <p>Dispare eventos para ver a reação do app.</p>
+
+            <div class="event-grid">
+                <button class="event-card" onclick="app.triggerEvent('TRAFFIC')">
+                    <span class="material-icons-round icon-traffic">traffic</span>
+                    <span>Trânsito Intenso</span>
+                </button>
+
+                <button class="event-card" onclick="app.triggerEvent('ACCIDENT')">
+                    <span class="material-icons-round icon-accident">warning</span>
+                    <span>Acidente na Via</span>
+                </button>
+
+                <button class="event-card" onclick="app.triggerEvent('CLEAR')">
+                    <span class="material-icons-round icon-clear">check_circle</span>
+                    <span>Via Liberada</span>
+                </button>
+            </div>
+
+            <div class="info-box">
+                <h4>Status do Sistema</h4>
+                <div id="system-status" class="status-indicator status-online">
+                    <span class="dot"></span>
+                    <span class="text">Online e Operando</span>
+                </div>
+                <small>Motor de Decisão ativo.</small>
+            </div>
+        </aside>
+
+        <!-- CENTRO: Mockup do Celular (Bloco B e C) -->
+        <section class="device-stage">
+            <div class="phone-mockup" id="phone-frame">
+
+                <!-- Notch / Camera -->
+                <div class="notch"></div>
+
+                <!-- Barra de Status (Falsa) -->
+                <div class="status-bar">
+                    <span class="time">14:30</span>
+                    <div class="icons">
+                        <span class="material-icons-round">wifi</span>
+                        <span class="material-icons-round">battery_std</span>
+                    </div>
+                </div>
+
+                <!-- TELA 1: Seleção de Destino -->
+                <div id="screen-search" class="app-screen active">
+                    <div class="app-header">
+                        <h2>Vamos para onde?</h2>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Saindo de: Colégio São Lucas</p>
+                    </div>
+
+                    <div class="input-group" data-db-source="Tabela: rota | destino">
+                        <span class="material-icons-round">search</span>
+                        <input type="text" placeholder="Buscar destino..." readonly>
+                    </div>
+
+                    <div class="recent-locations">
+                        <p class="section-title">Sugestões</p>
+
+                        <div class="location-item" onclick="app.selectDestination('Morro das Cabras', 'MORRO')"
+                            data-db-source="Tabela: Pontos | Frequencia">
+                            <span class="material-icons-round bg-blue">park</span>
+                            <div class="meta">
+                                <strong>Morro das Cabras</strong>
+                                <span>1.2 km • 5 min de carro</span>
+                            </div>
+                        </div>
+
+                        <div class="location-item" onclick="app.selectDestination('Calçadão', 'CALCADAO')"
+                            data-db-source="Tabela: Pontos | Frequencia">
+                            <span class="material-icons-round bg-green">storefront</span>
+                            <div class="meta">
+                                <strong>Calçadão</strong>
+                                <span>2.5 km • 8 min de carro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TELA 2: Carregando / Calculando -->
+                <div id="screen-loading" class="app-screen">
+                    <div class="loading-content">
+                        <div class="spinner"></div>
+                        <h3>Calculando Rota...</h3>
+                        <p>Consultando Motor de Decisão</p>
+                    </div>
+                </div>
+
+                <!-- TELA 3: Navegação / Mapa -->
+                <div id="screen-navigation" class="app-screen">
+                    <!-- Mapa de Fundo -->
+                    <div class="map-background"></div>
+
+                    <!-- Elementos Sobre o Mapa -->
+                    <div class="nav-overlay">
+                        <div class="nav-header card-glass">
+                            <div class="turn-icon">
+                                <span class="material-icons-round">turn_right</span>
+                            </div>
+                            <div class="turn-info">
+                                <span class="distance">200m</span>
+                                <span class="street-name" data-db-source="Tabela: rota | destino">Av. das
+                                    Américas</span>
+                            </div>
+                        </div>
+
+                        <!-- Botão Flutuante de Alerta -->
+                        <div class="fab-alert pulsate" style="display: none;" id="alert-fab">
+                            <span class="material-icons-round">warning</span>
+                            <span>Novo Caminho</span>
+                        </div>
+
+                        <div class="nav-footer card-glass">
+                            <div class="route-summary">
+                                <div class="stat">
+                                    <label>Tempo</label>
+                                    <strong id="eta-value" data-db-source="Tabela: Rota | tempoPrevisto">14
+                                        min</strong>
+                                </div>
+                                <div class="stat">
+                                    <label>Distância</label>
+                                    <strong data-db-source="Tabela: Trecho | distancia">3.2 km</strong>
+                                </div>
+                                <div class="stat">
+                                    <label>Chegada</label>
+                                    <strong>14:44</strong>
+                                </div>
+                            </div>
+                            <button class="btn-cancel" onclick="app.endNavigation()">Encerrar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMADA RAIO-X (Injetada via JS) -->
+                <div id="xray-layer" class="xray-overlay"></div>
+
+            </div>
+
+            <div class="phone-shadow"></div>
+        </section>
+
+        <!-- LADO DIREITO: Detalhes do Raio-X (Opcional, ou tooltips diretos) -->
+        <!-- Por enquanto focamos nos tooltips sobre o celular -->
+    </main>
+
+    <!-- JS -->
+    <script src="../js/interfaceOperacional.js"></script>
+</body>
+
+</html>

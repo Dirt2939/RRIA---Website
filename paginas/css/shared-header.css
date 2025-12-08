@@ -1,0 +1,31 @@
+/* --- SHARED HEADER STYLES --- */
+.ops-header {
+    background: #fff;
+    padding: 16px 32px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    z-index: 100;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #002C47;
+    /* Primary */
+}
+
+.header-title p {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: #666;
+}

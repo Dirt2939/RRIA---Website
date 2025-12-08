@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquitetura de Dados - RRIA</title>
+
     <link rel="stylesheet" href="../css/arquiteturaDados.css">
+    <link rel="stylesheet" href="../css/shared-header.css">
+
     <!-- Fonte Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 </head>
 
 <body>
     <div class="app-container">
-        <header class="header">
-            <h1>Arquitetura de Dados</h1>
-            <p class="subtitle">Estrutura de dados otimizada para decisões em tempo real</p>
+        <header class="ops-header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>Arquitetura de Dados</h1>
+                    <p>Estrutura de dados otimizada para decisões em tempo real</p>
+                </div>
+
+                <button onclick="window.location.href='../../mapa.html'"
+                    style="background:none; border:none; cursor:pointer; color:#666;">
+                    <span class="material-icons-round">arrow_back</span>
+                </button>
+            </div>
         </header>
 
         <div class="main-layout fade-in">
@@ -25,31 +38,27 @@
                     <h3 class="card-title">
                         <svg class="card-icon" viewBox="0 0 24 24">
                             <path
-                                d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M7,20H9V18H7V20M11,20H13V18H11V20M15,20H17V18H15V20M7,16H9V14H7V16M11,16H13V14H11V16M15,16H17V14H15V16M7,12H9V10H7V12M11,12H13V10H11V12M15,12H17V10H15V12Z" />
+                                d="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z" />
                         </svg>
                         Painel Raio-X
                     </h3>
                 </div>
 
                 <div class="info-block">
-                    <p class="info-label">Entidade Selecionada</p>
-                    <div id="xray-entity-name" class="xray-content"
-                        style="min-height: 48px; font-weight: bold; padding: 0 16px; display: flex; align-items: center; color: var(--cor-destaque);">
-                        Nenhuma seleção
+                    <div class="info-label">ENTIDADE SELECIONADA</div>
+                    <div class="xray-content" id="xray-entity-name">Nenhuma seleção</div>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-label">ATRIBUTOS E DETALHES</div>
+                    <div class="xray-content" id="xray-details">
+                        Clique em uma entidade do diagrama ao lado para ver os detalhes da estrutura de dados.
                     </div>
                 </div>
 
-                <div class="info-block" style="flex: 1;">
-                    <p class="info-label">Atributos e Detalhes</p>
-                    <div id="xray-details" class="xray-content" style="height: 100%;">
-                        <p style="color: #999; font-style: italic;">Clique em uma entidade do diagrama ao lado para ver
-                            os detalhes da estrutura de dados.</p>
-                    </div>
-                </div>
-
-                <button id="btn-reset-view" class="zoom-btn"
-                    style="width: 100%; border-radius: 8px; font-size: 0.9rem; font-weight: 600; gap: 8px;">
-                    <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                <button id="btn-reset-view"
+                    style="margin-top: auto; padding: 12px; background: #5a99d4; color: white; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600;">
+                    <svg style="width:20px;height:20px;fill:white" viewBox="0 0 24 24">
                         <path
                             d="M12,5V1L7,6L12,11V7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12H5A7,7 0 0,0 12,19A7,7 0 0,0 19,12A7,7 0 0,0 12,5Z" />
                     </svg>
@@ -64,6 +73,7 @@
 
                         <defs>
                             <style>
+                                <![CDATA[
                                 .entity-box {
                                     fill: white;
                                     stroke: #002C47;
@@ -80,18 +90,17 @@
                                 }
 
                                 .conn-line {
-                                    stroke: #555;
-                                    stroke-width: 1.5px;
+                                    stroke: #333;
+                                    stroke-width: 2px;
                                     fill: none;
                                 }
 
                                 .entity-title {
                                     font-family: 'Inter', sans-serif;
-                                    font-weight: 700;
                                     font-size: 14px;
+                                    font-weight: 700;
                                     fill: #002C47;
                                     text-anchor: middle;
-                                    pointer-events: none;
                                 }
 
                                 .relation-text {
@@ -107,7 +116,6 @@
                                     font-family: 'Inter', sans-serif;
                                     font-size: 12px;
                                     fill: #666;
-                                    background: rgba(255, 255, 255, 0.8);
                                     text-anchor: middle;
                                 }
 
@@ -132,6 +140,7 @@
                                     stroke: #5a99d4;
                                     stroke-width: 3px;
                                 }
+                                ]]>
                             </style>
                             <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
                                 markerUnits="strokeWidth">
@@ -142,145 +151,100 @@
                         <!-- GRUPO PRINCIPAL -->
                         <g id="der-artboard">
 
-                            <!-- LAYOUT COBRA (SNAKE) 
-                                 Row 1 (y=80):  Rua(150) -> Trecho(650)
-                                 Row 2 (y=320): Evento(150) <- Rota(650)
-                                 Row 3 (y=560): Ponto(150)
-                                 
-                                 Flow:
-                                 1. Rua -> Trecho (Horiz Right)
-                                 2. Trecho -> Rota (Vertical Down)
-                                 3. Rota -> Evento (Horiz Left)
-                                 4. Evento -> Ponto (Vertical Down)
-                            -->
-
                             <!-- LINHAS DE CONEXÃO -->
-
-                            <!-- 1. Rua(150,80) -> Contém(400,80) -> Trecho(650,80) -->
                             <path class="conn-line" d="M210,80 L590,80" />
-
-                            <!-- 2. Trecho(650,80) -> Composição(650,200) -> Rota(650,320) -->
                             <path class="conn-line" d="M650,110 L650,290" />
-
-                            <!-- 3. Rota(650,320) -> Afetar(400,320) -> Evento(150,320) -->
                             <path class="conn-line" d="M590,320 L210,320" />
-
-                            <!-- 4. Evento(150,320) -> Acontecimento(150,440) -> Ponto(150,560) -->
                             <path class="conn-line" d="M150,350 L150,530" />
 
-
                             <!-- RELACIONAMENTOS (Losangos) -->
-
-                            <!-- Contém (Horiz Row 1) -->
                             <g class="relation-group" transform="translate(400, 80)" data-name="Contém"
                                 data-type="relation">
                                 <polygon points="0,-25 35,0 0,25 -35,0" class="relation-shape" />
                                 <text y="4" class="relation-text">Contém</text>
                             </g>
 
-                            <!-- Composição (Vertical Right) -->
                             <g class="relation-group" transform="translate(650, 200)" data-name="Composição"
                                 data-type="relation">
                                 <polygon points="0,-25 55,0 0,25 -55,0" class="relation-shape" />
                                 <text y="4" class="relation-text">Composição</text>
                             </g>
 
-                            <!-- Afetar (Horiz Row 2) -->
                             <g class="relation-group" transform="translate(400, 320)" data-name="Afetar"
                                 data-type="relation">
                                 <polygon points="0,-25 35,0 0,25 -35,0" class="relation-shape" />
                                 <text y="4" class="relation-text">Afetar</text>
                             </g>
 
-                            <!-- Acontecimento (Vertical Left) -->
                             <g class="relation-group" transform="translate(150, 440)" data-name="Acontecimento"
                                 data-type="relation">
                                 <polygon points="0,-25 60,0 0,25 -60,0" class="relation-shape" />
                                 <text y="4" class="relation-text">Acontecimento</text>
                             </g>
 
-
                             <!-- CARDINALIDADES E PAPÉIS -->
-
-                            <!-- Rua -> Contém -->
                             <text x="260" y="70" class="cardinality-text">(1,1) pertence a</text>
                             <text x="540" y="70" class="cardinality-text">(1,n) tem</text>
-
-                            <!-- Trecho -> Composição (Vertical) -->
-                            <text x="700" y="140" class="cardinality-text" text-anchor="start">(0,n)composta</text>
-
+                            <text x="700" y="140" class="cardinality-text" text-anchor="start">(0,n) composta</text>
                             <text x="690" y="275" class="cardinality-text" text-anchor="start">(1,n) de</text>
-
-                            <!-- Rota -> Evento (Invertido: Rota na dir, Evento na esq) -->
-                            <!-- Sai da Rota (650) vai pra esq -->
                             <text x="550" y="310" class="cardinality-text">(0,n) afeta</text>
-                            <!-- Chega no Evento (150) -->
                             <text x="260" y="310" class="cardinality-text">(1,n) afetada</text>
-
-                            <!-- Evento -> Acontecimento (Vertical) -->
                             <text x="190" y="380" class="cardinality-text" text-anchor="start">(1,n) ocorre</text>
                             <text x="180" y="520" class="cardinality-text" text-anchor="start">(1,1) em</text>
 
-
                             <!-- ENTIDADES -->
-
-                            <!-- RUA (Top Left) -->
                             <g id="entity-rua" class="entity-group" transform="translate(150, 80)" data-name="Rua"
                                 data-type="entity" data-attrs="idRua (PK), nome, velocidade, sentido">
                                 <rect x="-60" y="-30" width="120" height="60" class="entity-box" rx="4" />
                                 <text x="0" y="5" class="entity-title">Rua</text>
-                                <circle cx="-50" cy="-45" r="3" fill="black" /> <text x="-42" y="-42" class="attr-text"
-                                    font-weight="bold">idRua</text>
-                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" /> <text x="-42" y="-57"
-                                    class="attr-text">nome</text>
+                                <circle cx="-50" cy="-45" r="3" fill="black" />
+                                <text x="-42" y="-42" class="attr-text" font-weight="bold">idRua</text>
+                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" />
+                                <text x="-42" y="-57" class="attr-text">nome</text>
                             </g>
 
-                            <!-- TRECHO (Top Right) -->
                             <g id="entity-trecho" class="entity-group" transform="translate(650, 80)" data-name="Trecho"
                                 data-type="entity" data-attrs="idTrecho (PK), inicio, fim, distancia">
                                 <rect x="-60" y="-30" width="120" height="60" class="entity-box" rx="4" />
                                 <text x="0" y="5" class="entity-title">Trecho</text>
-                                <circle cx="-50" cy="-45" r="3" fill="black" /> <text x="-42" y="-42" class="attr-text"
-                                    font-weight="bold">idTrecho</text>
-                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" /> <text x="-42" y="-57"
-                                    class="attr-text">distancia</text>
+                                <circle cx="-50" cy="-45" r="3" fill="black" />
+                                <text x="-42" y="-42" class="attr-text" font-weight="bold">idTrecho</text>
+                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" />
+                                <text x="-42" y="-57" class="attr-text">distancia</text>
                             </g>
 
-                            <!-- ROTA (Mid Right) -->
                             <g id="entity-rota" class="entity-group" transform="translate(650, 320)" data-name="Rota"
                                 data-type="entity" data-attrs="idRota (PK), origem, destino, tempoPrevisto">
                                 <rect x="-60" y="-30" width="120" height="60" class="entity-box" rx="4" />
                                 <text x="0" y="5" class="entity-title">Rota</text>
-                                <circle cx="-50" cy="-45" r="3" fill="black" /> <text x="-42" y="-42" class="attr-text"
-                                    font-weight="bold">idRota</text>
-                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" /> <text x="-42" y="-57"
-                                    class="attr-text">tempo</text>
+                                <circle cx="-50" cy="-45" r="3" fill="black" />
+                                <text x="-42" y="-42" class="attr-text" font-weight="bold">idRota</text>
+                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" />
+                                <text x="-42" y="-57" class="attr-text">tempo</text>
                             </g>
 
-                            <!-- EVENTO (Mid Left) -->
                             <g id="entity-evento" class="entity-group" transform="translate(150, 320)"
                                 data-name="Evento" data-type="entity"
                                 data-attrs="idEvento (PK), tipo, impacto, localizacao">
                                 <rect x="-60" y="-30" width="120" height="60" class="entity-box" rx="4" />
                                 <text x="0" y="5" class="entity-title">Evento</text>
-                                <circle cx="-50" cy="-45" r="3" fill="black" /> <text x="-42" y="-42" class="attr-text"
-                                    font-weight="bold">idEvento</text>
-                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" /> <text x="-42" y="-57"
-                                    class="attr-text">tipo</text>
+                                <circle cx="-50" cy="-45" r="3" fill="black" />
+                                <text x="-42" y="-42" class="attr-text" font-weight="bold">idEvento</text>
+                                <circle cx="-50" cy="-60" r="3" fill="white" stroke="#333" />
+                                <text x="-42" y="-57" class="attr-text">tipo</text>
                             </g>
 
-                            <!-- PONTO (Bottom Left) -->
                             <g id="entity-ponto" class="entity-group" transform="translate(150, 560)" data-name="Ponto"
                                 data-type="entity" data-attrs="idPonto (PK), latitude, longitude, tipoPonto">
                                 <rect x="-60" y="-30" width="120" height="60" class="entity-box" rx="4" />
                                 <text x="0" y="5" class="entity-title">Ponto</text>
-                                <circle cx="-58" cy="-45" r="3" fill="black" /> <text x="-50" y="-42" class="attr-text"
-                                    font-weight="bold">idPonto</text>
-                                <circle cx="-58" cy="-60" r="3" fill="white" stroke="#333" /> <text x="-50" y="-57"
-                                    class="attr-text">lat/long</text>
+                                <circle cx="-58" cy="-45" r="3" fill="black" />
+                                <text x="-50" y="-42" class="attr-text" font-weight="bold">idPonto</text>
+                                <circle cx="-58" cy="-60" r="3" fill="white" stroke="#333" />
+                                <text x="-50" y="-57" class="attr-text">lat/long</text>
                             </g>
 
-                        </g><!-- Fim der-artboard -->
+                        </g>
                     </svg>
 
                     <!-- Mini Mapa -->
