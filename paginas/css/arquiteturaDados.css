@@ -1,5 +1,5 @@
 /* Arquitetura de Dados - Estilos */
-/* Base reaproveitada do Motor de Decisão */
+/* Baseado em Motor de Decisão */
 
 :root {
     --cor-destaque: #002C47;
@@ -10,11 +10,18 @@
     --cor-botao: #5a99d4;
     --cor-botao-hover: #4a89c4;
     --cor-botao-dark: #3a6994;
-    --cor-evento: #7c3aed;
-    --cor-overlay: rgba(0, 0, 0, 0.75);
+    --cor-rota: #7c3aed;
+    --cor-bg: #f2fbff;
+
+    /* Variáveis do DER */
+    --cor-entidade-bg: #ffffff;
+    --cor-entidade-border: #002C47;
+    --cor-relacao-bg: #ffffff;
+    --cor-relacao-border: #4a4a4a;
+    --cor-linha: #333333;
+
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -25,15 +32,16 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f2fbff;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    background: var(--cor-bg);
     color: var(--cor-texto);
     line-height: 1.6;
     overflow-x: hidden;
+    height: 100vh;
 }
 
 .app-container {
-    min-height: 100vh;
+    height: 100vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -41,50 +49,63 @@ body {
 }
 
 .header {
-    background: #013955;
+    background: var(--cor-destaque);
     color: white;
-    padding: 24px 32px;
+    padding: 20px 32px;
     border-radius: 12px;
     box-shadow: var(--shadow-md);
+    flex-shrink: 0;
 }
 
 .header h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 4px;
 }
 
 .header .subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     opacity: 0.9;
 }
 
-/* Layout principal ajustado */
-.main-content {
+.main-layout {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 320px 1fr;
     gap: 20px;
-    align-items: start;
+    flex: 1;
+    min-height: 0;
+    /* Important for scroll/flex */
+    overflow: hidden;
+    /* Evita scroll da página inteira */
 }
 
+/* Cartões */
 .card {
     background: var(--cor-card);
     border-radius: 12px;
     box-shadow: var(--shadow-md);
-    padding: 24px;
-    height: 100%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--cor-border);
+    height: 100%;
+    overflow: hidden;
+}
+
+.card-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cor-border);
 }
 
 .card-title {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--cor-destaque);
-    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
 }
 
 .card-icon {
@@ -93,386 +114,137 @@ body {
     fill: var(--cor-destaque);
 }
 
-/* Mapa reduzido (40% PC) */
-.map-container {
-    position: relative;
-}
-
-.map-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 500px;
-    background: #e9ebee;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--cor-border);
-    cursor: crosshair;
+/* Painel Raio-X */
+.xray-container {
     display: flex;
-}
-
-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-.event-marker-group {
-    cursor: pointer;
-}
-
-.event-marker-content {
-    transition: var(--transition);
-    transform-origin: center;
-    transform-box: fill-box;
-}
-
-.event-marker-group:hover .event-marker-content {
-    transform: scale(1.15);
-}
-
-/* Lupa Forense 2x */
-.magnifier-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--cor-overlay);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.3s ease;
-}
-
-.magnifier-overlay.active {
-    display: flex;
-}
-
-.magnifier {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 8px solid #fff;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    background: #fff;
-    animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.magnifier-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(2);
-    text-align: center;
-    width: 120px;
-}
-
-.magnifier-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 12px;
-}
-
-.magnifier-info {
-    font-size: 0.75rem;
-    color: var(--cor-texto);
-    line-height: 1.4;
-}
-
-.magnifier-info strong {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--cor-destaque);
-    margin-bottom: 4px;
-}
-
-/* Painel Raio-X Lateral */
-.xray-panel {
-    position: fixed;
-    top: 0;
-    right: -400px;
-    width: 400px;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
-    z-index: 1001;
-    padding: 32px 24px;
+    flex-direction: column;
+    gap: 16px;
     overflow-y: auto;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.xray-panel.active {
-    right: 0;
+.info-block {
+    margin-bottom: 16px;
 }
 
-.xray-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid var(--cor-border);
-}
-
-.xray-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--cor-destaque);
-}
-
-.xray-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
+.info-label {
+    font-size: 0.8rem;
     color: var(--cor-texto-muted);
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-.xray-close:hover {
-    background: #f0f0f0;
-    color: var(--cor-texto);
-}
-
-.xray-section {
-    margin-bottom: 24px;
-}
-
-.xray-section h4 {
-    font-size: 0.9rem;
     font-weight: 600;
-    color: var(--cor-texto-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-.xray-data {
+.xray-content {
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 16px;
-    border-left: 4px solid var(--cor-botao);
-}
-
-.xray-data-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.xray-data-row:last-child {
-    border-bottom: none;
-}
-
-.xray-data-label {
-    font-weight: 600;
-    color: var(--cor-texto-muted);
-    font-size: 0.85rem;
-}
-
-.xray-data-value {
-    color: var(--cor-texto);
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.xray-relations {
-    list-style: none;
-    padding: 0;
-}
-
-.xray-relations li {
-    padding: 10px;
-    background: #f0f7ff;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-    color: var(--cor-texto);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.xray-relations li::before {
-    content: "→";
-    font-weight: bold;
-    color: var(--cor-botao);
-}
-
-/* Botões de ação */
-.action-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.btn {
-    flex: 1;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.btn-primary {
-    background: var(--cor-botao);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--cor-botao-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-secondary {
-    background: var(--cor-botao-dark);
-    color: white;
-}
-
-.btn-secondary:hover {
-    background: #2a5984;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    padding: 12px;
+    min-height: 50px;
+    font-size: 0.9rem;
 }
 
 /* DER Container */
 .der-container {
-    display: none;
-    margin-top: 20px;
-    padding: 24px;
-    background: var(--cor-card);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
+    position: relative;
+    padding: 0;
+    background: #ffffff;
 }
 
-.der-container.active {
-    display: block;
-    animation: slideDown 0.4s ease;
-}
-
-.der-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--cor-destaque);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.der-diagram {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.der-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: grab;
+    background-image: radial-gradient(#e1e4e8 1px, transparent 1px);
+    background-size: 20px 20px;
     position: relative;
 }
 
-.der-table {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border: 2px solid var(--cor-botao);
+.der-wrapper:active {
+    cursor: grabbing;
+}
+
+svg#der-svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+    will-change: transform;
+    /* Remover touch-action se JS controlar tudo */
+}
+
+/* Controles de Zoom */
+.zoom-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 8px;
     border-radius: 8px;
-    padding: 16px;
-    animation: fadeInSlide 0.6s ease forwards;
-    opacity: 0;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
 }
 
-.der-table:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.der-table:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.der-table:nth-child(3) {
-    animation-delay: 0.5s;
-}
-
-.der-table-name {
-    font-size: 1rem;
-    font-weight: 700;
+.zoom-btn {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--cor-border);
+    border-radius: 6px;
+    background: white;
     color: var(--cor-destaque);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--cor-botao);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
 }
 
-.der-field {
-    padding: 6px 0;
-    font-size: 0.85rem;
-}
-
-.der-field strong {
+.zoom-btn:hover {
+    background: #f0f4f8;
     color: var(--cor-botao);
 }
 
-/* Info Panel */
-.info-panel {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+/* Mini Mapa */
+.mini-map-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 240px;
+    /* Um pouco mais largo para o diagrama wide */
+    height: 100px;
+    background: white;
+    border: 2px solid var(--cor-border);
     border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    z-index: 10;
 }
 
-.info-panel h3 {
-    font-size: 1rem;
-    color: var(--cor-destaque);
-    margin-bottom: 8px;
+.mini-map-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #f8f9fa;
 }
 
-.info-panel p {
-    font-size: 0.875rem;
-    color: var(--cor-texto);
-    line-height: 1.6;
+.mini-map-viewport {
+    position: absolute;
+    border: 2px solid var(--cor-botao);
+    background: rgba(90, 153, 212, 0.2);
+    cursor: move;
 }
 
-/* Animações */
+/* Animation */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(10px);
     }
 
     to {
@@ -481,57 +253,64 @@ svg {
     }
 }
 
-@keyframes fadeInSlide {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-
-    .map-wrapper {
-        height: 300px;
-    }
-
-    .magnifier {
-        width: 250px;
-        height: 250px;
-    }
-
-    .xray-panel {
-        width: 100%;
-        right: -100%;
-    }
-
-    .der-diagram {
-        grid-template-columns: 1fr;
-    }
-
-    .action-buttons {
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+    .main-layout {
+        display: flex;
         flex-direction: column;
+        grid-template-columns: none;
+        grid-template-rows: none;
+        overflow: visible;
+        /* Deixa o conteúdo ditar a altura */
+    }
+
+    .der-container {
+        order: 1;
+        /* DER no topo */
+        height: 500px;
+        /* Altura fixa confortável para o mapa */
+        flex: 0 0 auto;
+        min-height: 0;
+    }
+
+    .xray-container {
+        order: 2;
+        /* XRay em baixo */
+        flex: 0 0 auto;
+        /* Altura automática baseada no conteúdo */
+        max-height: none;
+        /* Remove limite */
+        overflow: visible;
+    }
+
+    .app-container {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
     }
 }
 
-/* Scrollbar customizada */
-.xray-panel::-webkit-scrollbar {
-    width: 6px;
-}
+@media (max-width: 600px) {
+    .header {
+        padding: 16px;
+    }
 
-.xray-panel::-webkit-scrollbar-track {
-    background: #f8f9fa;
-}
+    .header h1 {
+        font-size: 1.25rem;
+    }
 
-.xray-panel::-webkit-scrollbar-thumb {
-    background: var(--cor-botao);
-    border-radius: 3px;
+    .zoom-controls {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .mini-map-container {
+        display: none;
+        /* Esconde mini-mapa no mobile */
+    }
+
+    .xray-container {
+        max-height: none;
+        /* Deixa expandir */
+    }
 }
