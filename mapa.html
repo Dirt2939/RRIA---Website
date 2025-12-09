@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>RRIA - Central de Navegação</title>
+
+    <!-- Preserved Map Styles -->
     <link rel="stylesheet" href="style2.css">
+
+    <!-- Layout Styles -->
+    <link rel="stylesheet" href="mapaLayout.css">
+    <link rel="stylesheet" href="mapaMobile.css"> <!-- New Mobile CSS -->
     <link rel="stylesheet" href="paginas/css/pageTransitions.css">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -13,56 +21,126 @@
 <body>
     <script src="paginas/js/pageTransitions.js"></script>
 
-    <header>
-        <div class="marca">
-            <a href="index.html" style="text-decoration: none; color: inherit;">
-                <h1>RRIA</h1>
-            </a>
-        </div>
-    </header>
+    <!-- Mobile Sidebar Overlay (Optional kept if needed, visually hidden by CSS mostly) -->
+    <div class="sidebar-overlay"></div>
 
-    <section id="mapa">
-        <div id="container-mapa">
-            <div id="container-txt">
-                <div id="titulo">
-                    <h2>Central de Navegação</h2>
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="map-header fade-in-ui">
+            <div class="header-left">
+
+
+                <a href="index.html" class="back-btn" title="Voltar">
+                    <span class="material-icons-round">arrow_back</span>
+                </a>
+
+                <div class="brand-info">
+                    <h1>Painel de Controle</h1>
+                    <span>RRIA System</span>
                 </div>
-                <div id="subtitulo">
-                    <h3>Selecione um destino para iniciar sua investigação.</h3>
+            </div>
+        </header>
+
+        <!-- SIDEBAR (Desktop Fixed / Mobile Bottom Sheet) -->
+        <aside class="sidebar">
+            <!-- HANDLE BAR (Mobile Only) -->
+            <div class="sheet-handle-area">
+                <div class="sheet-handle"></div>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="sidebar-title">Painel de Eventos</div>
+
+                <div class="controls-list">
+                    <!-- Point 1 -->
+                    <div class="control-item" data-target-id="1">
+                        <div class="item-icon">
+                            <span class="material-icons-round">settings_suggest</span>
+                        </div>
+                        <div class="item-info">
+                            <h4>Motor de Decisão</h4>
+                            <p>Lógica de reação</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="control-item" data-target-id="2">
+                        <div class="item-icon">
+                            <span class="material-icons-round">dns</span>
+                        </div>
+                        <div class="item-info">
+                            <h4>Arquitetura</h4>
+                            <p>Estrutura de dados</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="control-item" data-target-id="3">
+                        <div class="item-icon">
+                            <span class="material-icons-round">laptop</span>
+                        </div>
+                        <div class="item-info">
+                            <h4>Interface</h4>
+                            <p>Visual do Operador</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="control-item" data-target-id="4">
+                        <div class="item-icon">
+                            <span class="material-icons-round">psychology</span>
+                        </div>
+                        <div class="item-info">
+                            <h4>Psicologia</h4>
+                            <p>Fator Humano</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div class="sidebar-footer">
+                <button class="btn-fullscreen" id="btn-fullscreen-sidebar">
+                    <span class="material-icons-round">fullscreen</span>
+                    Tela Cheia
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAP VIEW AREA -->
+        <main class="map-view">
+            <!-- WRAPPER (Preserved for map logic) -->
             <div class="map-wrapper">
-                <!-- Fullscreen Button -->
-                <button id="fullscreen-btn" class="fullscreen-btn" title="Tela cheia" aria-label="Tela cheia">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Original Hidden Buttons -->
+                <button id="fullscreen-btn" class="fullscreen-btn" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
                             fill="#002C47" />
                     </svg>
                 </button>
-                <!-- Exit Fullscreen Button (initially hidden) -->
-                <button id="exit-fullscreen-btn" class="fullscreen-btn" style="display: none;"
-                    title="Sair da tela cheia" aria-label="Sair da tela cheia">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <button id="exit-fullscreen-btn" class="fullscreen-btn" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
                             fill="#002C47" />
                     </svg>
                 </button>
 
-                <!-- Popup Info (Floating) -->
+                <!-- Popup -->
                 <div id="info-popup">
                     <button id="btn-fechar-popup">×</button>
-                    <h4 id="popup-title">Título da Seção</h4>
-                    <p id="popup-desc">Breve descrição sobre o que será encontrado nesta seção da investigação.</p>
+                    <h4 id="popup-title">Título</h4>
+                    <p id="popup-desc">Descrição...</p>
                     <button id="btn-viajar">Viajar</button>
                 </div>
 
-                <!-- Arrival Overlay -->
+                <!-- Overlay -->
                 <div id="arrival-overlay">
                     <h2>Você Chegou!</h2>
-                    <p>Redirecionando para a seção...</p>
+                    <p>Redirecionando...</p>
                 </div>
 
+                <!-- SVG MAP (EXACT ORIGINAL) -->
                 <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" id="main-map">
                     <defs>
                         <pattern id="grass" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -78,7 +156,7 @@
                     <!-- Background Land -->
                     <rect width="800" height="600" fill="#e9ebee" />
 
-                    <!-- Irregular Blocks/Buildings -->
+                    <!-- Buildings & Logic -->
                     <path d="M-10,-10 L350,-10 L300,200 L100,250 L-10,150 Z" fill="url(#building-pattern)" stroke="#ccc"
                         stroke-width="1" />
                     <path d="M450,-10 L810,-10 L810,150 L600,250 L450,150 Z" fill="url(#building-pattern)" stroke="#ccc"
@@ -94,7 +172,6 @@
                     <path d="M650,300 L750,350 L700,450 L620,400 Z" fill="url(#building-pattern)" stroke="#ccc"
                         stroke-width="1" />
 
-                    <!-- Random Buildings -->
                     <rect x="50" y="50" width="60" height="80" fill="#d1d5db" />
                     <rect x="150" y="30" width="100" height="60" fill="#d1d5db" />
                     <rect x="650" y="50" width="80" height="80" fill="#d1d5db" />
@@ -103,7 +180,6 @@
                     <rect x="300" y="50" width="50" height="50" fill="#d1d5db" />
                     <rect x="450" y="50" width="50" height="50" fill="#d1d5db" />
 
-                    <!-- Parks -->
                     <path d="M280,400 L350,550 L450,550 L400,400 Z" fill="url(#grass)" />
 
                     <!-- Streets -->
@@ -128,28 +204,25 @@
                         <path d="M0,450 L800,450" stroke="#ffffff" stroke-width="12" />
                     </g>
 
-                    <!-- Route Paths (Hidden) -->
+                    <!-- Hidden Routes -->
                     <path id="route-1" d="M400,300 L350,250 L100,71" fill="none" stroke="none" />
                     <path id="route-2" d="M400,300 L450,300 L700,86" fill="none" stroke="none" />
                     <path id="route-3" d="M400,300 L350,250 L80,520" fill="none" stroke="none" />
                     <path id="route-4" d="M400,300 L450,300 L720,531" fill="none" stroke="none" />
 
-                    <!-- Visible Route Line (STRONG PURPLE) -->
+                    <!-- Active Route -->
                     <path id="active-route" d="" stroke="#8b5cf6" stroke-width="8" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" opacity="0.9" />
 
-                    <!-- Start Point (Location Pin) -->
+                    <!-- Start Point -->
                     <g id="start-point" transform="translate(400, 300)">
-                        <!-- Outer circle glow -->
                         <circle r="20" fill="rgba(51, 204, 255, 0.2)" />
                         <circle r="14" fill="rgba(51, 204, 255, 0.4)" />
-                        <!-- Main pin circle -->
                         <circle r="10" fill="#33ccff" stroke="#fff" stroke-width="3" />
-                        <!-- Inner white dot -->
                         <circle r="4" fill="#fff" />
                     </g>
 
-                    <!-- Destinations with ! -->
+                    <!-- Destinations -->
                     <g class="map-point" data-id="1" transform="translate(90, 60)">
                         <circle r="15" fill="#ff5252" stroke="#fff" stroke-width="3" />
                         <text y="7" text-anchor="middle" fill="white" font-weight="bold" font-size="20">!</text>
@@ -167,17 +240,21 @@
                         <text y="7" text-anchor="middle" fill="white" font-weight="bold" font-size="20">!</text>
                     </g>
 
-                    <!-- Pointer Marker (Arrow) -->
+                    <!-- Marker -->
                     <g id="car-marker" class="car-marker" transform="translate(400, 300) scale(0)">
                         <path d="M0,-15 L10,10 L0,5 L-10,10 Z" fill="#33ccff" stroke="#002C47" stroke-width="2" />
                     </g>
 
                 </svg>
             </div>
-        </div>
-    </section>
+            <!-- WRAPPER END -->
+        </main>
+    </div>
 
+    <!-- Scripts -->
     <script src="mapa.js"></script>
+    <script src="mapaLayout.js"></script>
+    <script src="mapaMobile.js"></script> <!-- New Mobile Logic -->
 </body>
 
 </html>

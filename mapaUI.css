@@ -1,0 +1,346 @@
+/* 
+   RRIA - Mapa UI Styles V2
+   Professional, Hierarchy-Focused, Mobile-Responsive.
+*/
+
+:root {
+    --ui-sidebar-width: 280px;
+    /* Reduced to focus on map */
+    --ui-header-height: 72px;
+    /* Taller, more elegant */
+
+    /* Waze Palette & Professional Tones */
+    --clr-bg: #f5f7fa;
+    --clr-sidebar-bg: #ffffff;
+    --clr-primary: #3E8BF0;
+    --clr-primary-light: #eff6ff;
+    --clr-text-main: #1a202c;
+    --clr-text-secondary: #64748b;
+    --clr-text-tertiary: #94a3b8;
+    --clr-border: #e2e8f0;
+
+    /* Shadows & Radius */
+    --shadow-header: 0 4px 20px rgba(0, 0, 0, 0.03);
+    --shadow-sidebar: 4px 0 24px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 8px 16px rgba(62, 139, 240, 0.08);
+    --radius-ui: 16px;
+    --radius-sm: 8px;
+
+    --anim-speed: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--clr-bg);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--clr-text-main);
+}
+
+/* -----------------------------
+   1. HEADER
+----------------------------- */
+.map-header {
+    height: var(--ui-header-height);
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    box-shadow: var(--shadow-header);
+    z-index: 30;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-secondary);
+    background: white;
+    cursor: pointer;
+    transition: var(--anim-speed);
+}
+
+.back-btn:hover {
+    color: var(--clr-primary);
+    border-color: var(--clr-primary);
+    background: var(--clr-primary-light);
+    transform: translateX(-2px);
+}
+
+.brand-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-info h1 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--clr-text-main);
+}
+
+.brand-info span {
+    font-size: 0.8rem;
+    color: var(--clr-text-tertiary);
+    font-weight: 500;
+}
+
+/* -----------------------------
+   2. LAYOUT GRID
+----------------------------- */
+.app-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    /* Map visual hierarchy: Sidebar is left, Map is rest */
+}
+
+/* -----------------------------
+   3. SIDEBAR (Enhanced)
+----------------------------- */
+.sidebar {
+    width: var(--ui-sidebar-width);
+    background: var(--clr-sidebar-bg);
+    border-right: 1px solid var(--clr-border);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    z-index: 20;
+    box-shadow: var(--shadow-sidebar);
+    transition: transform var(--anim-speed);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--clr-text-tertiary);
+    font-weight: 700;
+}
+
+/* Cards / Event List */
+.map-controls-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+}
+
+.control-card {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: white;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--anim-speed);
+}
+
+.control-card:hover {
+    border-color: var(--clr-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.control-card.active {
+    background-color: var(--clr-primary-light);
+    border-color: var(--clr-primary);
+}
+
+.card-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--clr-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: var(--clr-text-secondary);
+    font-size: 1.2rem;
+    transition: var(--anim-speed);
+}
+
+.control-card:hover .card-icon,
+.control-card.active .card-icon {
+    background: var(--clr-primary);
+    color: white;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    margin-bottom: 2px;
+}
+
+.card-info p {
+    font-size: 0.75rem;
+    color: var(--clr-text-secondary);
+}
+
+/* Sidebar Footer Actions */
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--clr-border);
+}
+
+.btn-primary-action {
+    width: 100%;
+    padding: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--clr-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: var(--anim-speed);
+    box-shadow: 0 4px 10px rgba(62, 139, 240, 0.25);
+}
+
+.btn-primary-action:hover {
+    background: #2c6ec0;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(62, 139, 240, 0.35);
+}
+
+/* -----------------------------
+   4. MAIN CONTENT (MAP)
+----------------------------- */
+.main-content {
+    flex: 1;
+    position: relative;
+    background: #e6e9ef;
+    /* Slightly darker neutral for map bg */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.map-container-frame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* This ensures map fits but isn't stretched weirdly */
+}
+
+/* Map SVG Styling overrides */
+#main-map {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    /* Keep aspect ratio from JS logic */
+}
+
+/* -----------------------------
+   5. RESPONSIVE / MOBILE
+----------------------------- */
+/* Mobile Toggle Button (Visible only on mobile) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--clr-text-main);
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .main-content {
+        height: 100%;
+        /* Map takes full remaining space */
+        order: 1;
+        /* Map is visibly first (under header) */
+    }
+
+    /* Sidebar becomes a collapsible drawer/sheet */
+    .sidebar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        /* collapsed by default logic via JS class? Or accordion? */
+        max-height: 60px;
+        /* Collapsed view showing just header/pull tab */
+        border-right: none;
+        border-top: 1px solid var(--clr-border);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 50;
+        border-radius: 20px 20px 0 0;
+        padding: 1rem 1.5rem;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        order: 2;
+    }
+
+    .sidebar.open {
+        max-height: 60vh;
+        /* Scrollable sheet */
+    }
+
+    /* Handle for pulling visual info */
+    .sidebar::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: var(--clr-border);
+        border-radius: 2px;
+        margin: -0.5rem auto 1rem;
+    }
+}

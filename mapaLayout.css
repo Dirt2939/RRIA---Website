@@ -1,0 +1,291 @@
+/* 
+   RRIA - Mapa FULLSCREEN Layout
+   Strict zero-gap policy. 
+   Grid Layout: Sidebar | Map
+*/
+
+:root {
+    --sidebar-w: 280px;
+    --header-h: 60px;
+    /* Reduced for more map space */
+    --clr-bg: #f5f7fa;
+    --clr-surface: #ffffff;
+    --clr-border: #e2e8f0;
+    --clr-primary: #3E8BF0;
+    --clr-text: #1a202c;
+    --clr-text-light: #64748b;
+    --shadow-ui: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 1. RESET & BASE */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Prevent body scroll, handle inside containers */
+    font-family: 'Inter', sans-serif;
+    background: var(--clr-bg);
+    color: var(--clr-text);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 2. MAIN GRID CONTAINER */
+.app-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    height: 100vh;
+    grid-template-areas:
+        "header header"
+        "sidebar map";
+}
+
+/* 3. SIDEBAR */
+.sidebar {
+    grid-area: sidebar;
+    background: var(--clr-surface);
+    border-right: 1px solid var(--clr-border);
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    height: 100%;
+    position: relative;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+}
+
+/* HEADER */
+.map-header {
+    grid-area: header;
+    background: var(--clr-surface);
+    border-bottom: 1px solid var(--clr-border);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    justify-content: space-between;
+    z-index: 30;
+    height: var(--header-h);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.back-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-border);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--clr-text-light);
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: var(--clr-primary);
+    color: white;
+    border-color: var(--clr-primary);
+}
+
+/* Brand Info */
+.brand-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.brand-info h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.brand-info span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--clr-text-light);
+}
+
+/* 4. MAP AREA (FLUID) */
+.map-view {
+    grid-area: map;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Map handles its own panning if SVG is large */
+    background: #e6e9ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* THE MAP WRAPPER (Preserving inner logic) */
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* For overlays */
+}
+
+/* Force SVG to fill */
+#main-map {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Remove inline spacing */
+}
+
+/* 5. SIDEBAR CONTENT */
+.sidebar-content {
+    padding: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--clr-text-light);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.controls-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.control-item:hover {
+    border-color: var(--clr-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.item-icon {
+    width: 32px;
+    height: 32px;
+    background: #f1f5f9;
+    color: var(--clr-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.item-info h4 {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--clr-text);
+}
+
+.item-info p {
+    font-size: 0.75rem;
+    margin: 2px 0 0 0;
+    color: var(--clr-text-light);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--clr-border);
+}
+
+.btn-fullscreen {
+    width: 100%;
+    padding: 0.8rem;
+    background: white;
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.btn-fullscreen:hover {
+    background: #f8fafc;
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
+}
+
+/* 6. RESPONSIVE (MOBILE) */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--clr-text);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        /* Full viewport */
+    }
+
+    .map-header {
+        flex: 0 0 var(--header-h);
+        padding: 0 1rem;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    /* Sidebar becomes Drawer */
+    .sidebar {
+        /* Mobile styles overridden in mapaMobile.css usually, 
+           but we keep base layout reset here just in case. */
+        position: fixed;
+        /* ... */
+    }
+
+    /* Map takes ALL remaining space */
+    .map-view {
+        flex: 1;
+        width: 100%;
+        height: calc(100vh - var(--header-h));
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

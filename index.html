@@ -4,47 +4,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="paginas/css/pageTransitions.css">
-    <title>RRIA - Início</title>
+    <title>RRIA – Sistema Inteligente de Rotas</title>
 
-    <!-- Fonts -->
+    <!-- Fonts: Inter & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <script src="paginas/js/pageTransitions.js"></script>
 
-    <header>
-        <div class="marca">
-            <h1>RRIA</h1>
-        </div>
-    </header>
+    <!-- SECTION 1: HERO -->
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title reveal-up">RRIA – Sistema Inteligente de Rotas e Análise</h1>
+            <p class="hero-subtitle reveal-up delay-1">Simulação avançada da lógica do Waze aplicada a um ambiente
+                experimental. Entenda como decisões complexas são tomadas em milissegundos.</p>
 
-    <section id="home">
-        <div class="hero-left">
-            <div id="container-txt">
-                <div id="titulo">
-                    <h2>Dentro da inteligência por trás do Waze</h2>
-                </div>
-                <div id="subtitulo">
-                    <h3>Rastreamos, analisamos e explicamos o que acontece enquanto você dirige.</h3>
-                </div>
+            <div class="hero-actions reveal-up delay-2">
+                <a href="mapa.html" class="btn btn-primary">
+                    <span class="material-icons-round" style="margin-right:8px; font-size:1.2rem;">map</span>
+                    Entrar no Mapa
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    Sobre o Projeto
+                    <span class="material-icons-round" style="margin-left:4px; font-size:1.2rem;">arrow_downward</span>
+                </a>
             </div>
-
-            <div id="btn-ir">
-                <a href="mapa.html">Iniciar investigação →</a>
-            </div>
-        </div>
-
-        <div class="hero-right">
-            <img src="logo.png" alt="Logo RRIA">
         </div>
     </section>
 
+    <!-- SECTION 2: FEATURES (CARDS) -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2>O Projeto</h2>
+            </div>
+
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card reveal-up">
+                    <div class="feature-icon">
+                        <span class="material-icons-round">radar</span>
+                    </div>
+                    <h3 class="feature-title">Propósito do RRIA</h3>
+                    <p class="feature-desc">Entenda como simulamos, passo a passo, a lógica de decisão e de recálculo
+                        usada em sistemas reais de navegação e logística.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card reveal-up delay-1">
+                    <div class="feature-icon">
+                        <span class="material-icons-round">hub</span>
+                    </div>
+                    <h3 class="feature-title">Como Funciona</h3>
+                    <p class="feature-desc">Explore rotas, eventos, trechos, gatilhos, cálculos e as decisões
+                        automatizadas baseadas em dados em tempo real.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card reveal-up delay-2">
+                    <div class="feature-icon">
+                        <span class="material-icons-round">visibility</span>
+                    </div>
+                    <h3 class="feature-title">O Que Você Pode Ver</h3>
+                    <p class="feature-desc">Mapa dinâmico, motor de decisão transparente, arquitetura de dados e
+                        análises sobre o comportamento do usuário.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: TIMELINE -->
+    <section id="process" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2>Arquitetura e Fluxo</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step reveal-up">
+                    <div class="step-icon">
+                        <span class="material-icons-round">explore</span>
+                    </div>
+                    <div class="step-content">
+                        <h4>Mapa Interativo</h4>
+                        <p>Visualização geoespacial em tempo real.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step reveal-up delay-1">
+                    <div class="step-icon">
+                        <span class="material-icons-round">memory</span>
+                    </div>
+                    <div class="step-content">
+                        <h4>Motor de Decisão</h4>
+                        <p>Algoritmos de roteamento e lógica fuzzy.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step reveal-up delay-2">
+                    <div class="step-icon">
+                        <span class="material-icons-round">storage</span>
+                    </div>
+                    <div class="step-content">
+                        <h4>Arquitetura de Dados</h4>
+                        <p>Estrutura de grafos e nós.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step reveal-up delay-3">
+                    <div class="step-icon">
+                        <span class="material-icons-round">psychology</span>
+                    </div>
+                    <div class="step-content">
+                        <h4>Psicologia do Usuário</h4>
+                        <p>Fatores humanos na escolha de rotas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: TEAM -->
+    <section id="team" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2>Sobre Nós</h2>
+                <p style="color: var(--clr-text-secondary); margin-top: 0.5rem;">A equipe responsável pelo
+                    desenvolvimento do RRIA.</p>
+            </div>
+
+            <div class="team-wrapper">
+                <div class="team-member reveal-up">
+                    <div class="member-photo-frame">
+                        <img src="https://ui-avatars.com/api/?name=F+D&background=3E8BF0&color=fff&size=256" alt="Dev"
+                            class="member-img">
+                    </div>
+                    <h4 class="member-name">Fulano</h4>
+                    <span class="member-role">Engenheiro de Software</span>
+                    <p class="member-quote">"Focado na escalabilidade do motor de decisão."</p>
+                </div>
+
+                <div class="team-member reveal-up delay-1">
+                    <div class="member-photo-frame">
+                        <img src="https://ui-avatars.com/api/?name=C+A&background=635bff&color=fff&size=256"
+                            alt="Arquiteto" class="member-img">
+                    </div>
+                    <h4 class="member-name">Ciclano</h4>
+                    <span class="member-role">Data Scientist</span>
+                    <p class="member-quote">"Modelagem dos algoritmos preditivos e análise."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <strong>RRIA Project</strong> &copy; 2024
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/Dirt2939/RRIA---Website" target="_blank">GitHub</a>
+                <a href="#">Documentação</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="index.js"></script>
 </body>
 
 </html>

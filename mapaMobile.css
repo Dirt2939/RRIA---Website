@@ -1,0 +1,172 @@
+/* 
+   RRIA - Mobile Map UI Refinements
+   Targeting Mobile View (<768px) specifically.
+   Implements Bottom Sheet, Header Fixes, Map Spacing.
+*/
+
+@media (max-width: 768px) {
+
+    /* 1. HEADER FIXES */
+    .map-header {
+        height: auto;
+        min-height: 56px;
+        padding: 14px 1rem;
+        /* Adjusted vertical padding */
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        /* Single subtle shadow */
+        background: white;
+        z-index: 1001;
+        /* Ensure above map */
+        position: relative;
+    }
+
+    /* Ensure back button looks clean */
+    .back-btn {
+        border: 1px solid #edf2f7;
+        /* Clean border */
+        box-shadow: none;
+        /* Flat look */
+        background: #f8fafc;
+    }
+
+    /* 2. MAP CONTAINER SPACING */
+    .map-view {
+        /* Container for the map */
+        background: #f5f7fa;
+        /* Match app bg */
+        padding: 0 12px;
+        display: block;
+        /* Normal block flow to allow margin */
+        height: calc(100vh - 60px);
+        /* Fill remaining */
+        overflow: hidden;
+        /* Prevent body scroll */
+    }
+
+    /* The actual wrapper usually holds the SVG */
+    .map-wrapper {
+        margin-top: 12px;
+        border-radius: 14px;
+        overflow: hidden;
+        /* Clip SVG corners */
+        background: #e6e9ef;
+        height: calc(100% - 12px);
+        /* Adjust height to fit */
+        position: relative;
+        z-index: 1;
+        /* Below sheet */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        /* "Embedded" look */
+    }
+
+    /* 3. BOTTOM SHEET (Sidebar transformation) */
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        /* not top:0 */
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        /* Max expansion */
+        background: white;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+        /* Apple Maps style shadow */
+        z-index: 999;
+        /* Above map */
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(calc(100% - 40px - 20px));
+        /* Collapsed state: show only handle area (~60px) */
+
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        border: none;
+        overflow: visible;
+        /* To show internal content */
+    }
+
+    /* Expand State */
+    .sidebar.expanded {
+        transform: translateY(0);
+    }
+
+    /* HANDLE BAR AREA */
+    .sheet-handle-area {
+        width: 100%;
+        height: 40px;
+        /* Touch target */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        background: white;
+        border-radius: 20px 20px 0 0;
+        flex-shrink: 0;
+    }
+
+    /* The visual bar */
+    .sheet-handle {
+        width: 40px;
+        height: 4px;
+        background: #d8d8d8;
+        border-radius: 2px;
+        opacity: 0.8;
+    }
+
+    /* Sidebar Content adjustments for Sheet */
+    .sidebar-content {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        overflow-y: auto;
+        flex: 1;
+        /* Scroll internal content only when expanded */
+    }
+
+    .sidebar-title {
+        margin-bottom: 1rem;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    /* Hide Desktop specific footer if redundant or style it */
+    .sidebar-footer {
+        padding: 1rem 1.5rem;
+        background: white;
+        border-top: 1px solid #f1f5f9;
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+        /* iPhone Safe Area */
+    }
+
+    /* Mobile Toggle Button Hiding - User asked to remove it from HTML, 
+       but we also ensure it's hidden here just in case. */
+    .mobile-toggle {
+        display: none !important;
+    }
+
+    /* Overlay */
+    .sidebar-overlay {
+        display: none;
+    }
+
+    /* 4. AESTHETICS */
+    .control-item {
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+
+    .item-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .btn-fullscreen {
+        padding: 14px;
+        font-size: 1rem;
+    }
+}
